@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #c6f95b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #88ec47;
+      padding: 30px;
+      border: 2px solid black;
+      border-radius: 10px;
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .required {
+      color: red;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="email"] {
+      width: 95%;
+      padding: 5px;
+      margin-top: 5px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+
+    .gender {
+      display: flex;
+      gap: 20px;
+      margin-top: 5px;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      background-color: #0033cc;
+    }
+
+    .reset-btn {
+      background-color: red;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <form id="facultyForm" onsubmit="return validateForm()">
+    <h2>FACULTY REGISTRATION FORM</h2>
+
+    <label><span class="required">*</span> Employee ID</label>
+    <input type="text" id="empId" maxlength="6" />
+
+    <label><span class="required">*</span> Employee Name</label>
+    <input type="text" id="empName" maxlength="40" />
+
+    <label><span class="required">*</span> Gender</label>
+    <div class="gender">
+      <label><input type="radio" name="gender" value="Male" /> Male</label>
+      <label><input type="radio" name="gender" value="Female" /> Female</label>
+    </div>
+
+    <label><span class="required">*</span> DOB</label>
+    <input type="text" id="dob" placeholder="dd-mm-yyyy" />
+
+    <label><span class="required">*</span> DOJ</label>
+    <input type="date" id="doj" />
+
+    <label><span class="required">*</span> Email id</label>
+    <input type="email" id="email" />
+
+    <label><span class="required">*</span> Mobile Number</label>
+    <input type="text" id="mobile" maxlength="10" />
+
+    <div class="buttons">
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="reset" class="reset-btn">Reset</button>
+    </div>
+  </form>
+
+  <script>
+    function validateForm() {
+      const empId = document.getElementById("empId").value.trim();
+      const empName = document.getElementById("empName").value.trim();
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const dob = document.getElementById("dob").value.trim();
+      const doj = document.getElementById("doj").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+
+      // Check empty
+      if (!empId || !empName || !gender || !dob || !doj || !email || !mobile) {
+        alert("All fields are required.");
+        return false;
+      }
+
+      // Validate Employee ID
+      if (!/^[0-9]{6}$/.test(empId)) {
+        alert("Employee ID must be a 6-digit number.");
+        return false;
+      }
+      if (!empId.startsWith("5")) {
+        alert("Employee ID must start with 5.");
+        return false;
+      }
+
+      // Validate Employee Name
+      if (!/^[A-Za-z ]{10,40}$/.test(empName)) {
+        alert("Employee Name must be 10-40 alphabetic characters only.");
+        return false;
+      }
+
+      // Validate DOB Format
+      if (!/^\d{2}-\d{2}-\d{4}$/.test(dob)) {
+        alert("DOB must be in dd-mm-yyyy format.");
+        return false;
+      }
+
+      // Validate Mobile Number
+      if (!/^[0-9]{10}$/.test(mobile)) {
+        alert("Mobile number must be a 10-digit number.");
+        return false;
+      }
+
+      alert("Form submitted successfully!");
+      return true;
+    }
+  </script>
+</body>
+</html>
