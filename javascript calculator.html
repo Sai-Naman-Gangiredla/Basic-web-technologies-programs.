@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Calculator</title>
+    <style>
+    body {
+      background-color: #d6d659;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 500px;
+      background-color: #c0d833;
+      border: 3px solid black;
+      padding: 30px;
+      margin: 50px auto;
+      text-align: center;
+      box-shadow: 0 0 10px #333;
+    }
+
+    h1 {
+      color: #1a1a1a;
+      text-decoration: underline;
+    }
+
+    label {
+      display: inline-block;
+      width: 120px;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 150px;
+      padding: 5px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .add { background-color: #3b7dd8; }
+    .sub { background-color: #c43b3b; }
+    .mul { background-color: #a42a9c; }
+    .div { background-color: #3d883d; }
+    .mod { background-color: #1c1c1c; }
+    .reset { background-color: #e60000; }
+
+    .result-box {
+      background-color: #e1e8b3;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+    <h1>JAVASCRIPT CALCULATOR</h1>
+
+    <div>
+      <label>First Number :</label>
+      <input type="text" id="num1"><br>
+
+      <label>Second Number :</label>
+      <input type="text" id="num2"><br>
+
+      <label>Result :</label>
+      <input type="text" id="result" class="result-box" readonly><br>
+    </div>
+
+    <div class="buttons">
+      <button class="add" onclick="calculate('+')">+</button>
+      <button class="sub" onclick="calculate('-')">-</button>
+      <button class="mul" onclick="calculate('')"></button>
+      <button class="div" onclick="calculate('/')">/</button>
+      <button class="mod" onclick="calculate('%')">%</button>
+      <button class="reset" onclick="resetFields()">reset</button>
+    </div>
+  </div>
+  <script>
+    function calculate(operator) {
+      let num1 = parseFloat(document.getElementById("num1").value);
+      let num2 = parseFloat(document.getElementById("num2").value);
+      let result;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Please enter valid numbers.");
+        return;
+      }
+
+      switch (operator) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/': 
+          if (num2 === 0) {
+            alert("Division by zero is not allowed.");
+            return;
+          }
+          result = num1 / num2; break;
+        case '%': result = num1 % num2; break;
+      }
+
+      document.getElementById("result").value = result;
+    }
+
+    function resetFields() {
+      document.getElementById("num1").value = '';
+      document.getElementById("num2").value = '';
+      document.getElementById("result").value = '';
+    }
+  </script>
+</body>
+</html>
